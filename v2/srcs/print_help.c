@@ -1,6 +1,40 @@
 #include "../sort.h"
 #include <stdio.h>
 
+void print_struct2(int size, t_d *d)
+{
+	int j;
+
+	j = size - 1;
+	ft_putstr_fd("\nSTACK A: ", 1);
+	while (j >= 0)
+	{
+		if (d->a[j].bol == 1) 
+		{
+			ft_putstr_fd(ft_itoa(d->a[j].nb), 1);
+			ft_putstr_fd(" ", 1);
+		}
+		if (j == 0)
+			ft_putstr_fd("\n", 1);
+		j--;
+	}
+	j = size - 1;
+	ft_putstr_fd("STACK B: ", 1);
+	while (j >= 0)
+	{
+		if (d->b[j].bol == 1) 
+		{
+			ft_putstr_fd(ft_itoa(d->b[j].nb), 1);
+			ft_putstr_fd(" ", 1);
+		}
+		if (j == 0)
+			ft_putstr_fd("\n", 1);
+		j--;
+	}
+	ft_putstr_fd("\n", 1);
+}
+
+
 void print_struct(int size, t_d *d)
 {
 	int j;
@@ -32,7 +66,10 @@ int	print_list(t_list *l, int mod)
 	while (tmp)
 	{
 		if (mod == 1 || mod == 2)
-			printf("%s\n", tmp->content);
+		{
+			ft_putstr_fd(tmp->content, 1);
+			ft_putstr_fd("\n", 1);
+		}	
 		count++;
 		tmp = tmp->next;
 	}

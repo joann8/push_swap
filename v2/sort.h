@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:56:40 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 16:03:06 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 17:15:33 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_result
 {
 	int		f_nb;//show number
 	int		f_err;
+	int		f_see;
 	int		mod_err;//y'a t'il une erreur ou pas
 	char	*error_str;
 }				t_res;
@@ -116,6 +117,7 @@ int		sort_complex_phase_one(t_d *d, t_list **l, t_level *lev, int i, int *blocke
 
 //OTHERS
 void	print_struct(int ac, t_d *d);
+void	print_struct2(int ac, t_d *d);
 void	print_pack(t_pack *pack);
 int		print_list(t_list *l, int mod);
 int		calculate_levels(t_d *d);
