@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:56:40 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 12:21:33 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:03:06 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,16 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft/libft.h"
 
-# include "./libft/libft.h"
-# include "./libft/get_next_line_bonus.h"
+typedef struct	s_result
+{
+	int		f_nb;//show number
+	int		f_err;
+	int		mod_err;//y'a t'il une erreur ou pas
+	char	*error_str;
+}				t_res;
+
 
 typedef	struct	s_level
 {
@@ -62,12 +69,13 @@ typedef struct	s_data
 }				t_d;
 
 //CHECK ARGS
-int		check_args(int ac, char **av, t_d *d);
+int		check_args(int ac, char **av, t_d *d, t_res *r);
 void	ft_free_data(t_d *d);
 void	ft_free_list(t_list *l);
-int		check_doublons(t_d *d);
-int		check_args_several(int ac, char **av, t_d *d);
-int		check_args_single(char **av, t_d *d);
+int		check_doublons(t_d *d, t_res *r);
+int		check_args_several(int ac, char **av, t_d *d, int start);
+int		check_args_single(char **av, t_d *d, int start);
+void	init_flags(t_res *r);
 
 // CHECK ORDER
 int		check_order(t_d *d);
@@ -78,10 +86,10 @@ int		check_int_order_b_range(t_s *s, int low, int high);
 
 //INSTRUCTIONS
 int		check_inst(char *str);
-void	execute_inst(char *inst, t_d *d, int a, int b);
+//void	execute_inst(char *inst, t_d *d, int a, int b);
 int 	checker_test(t_list **l, t_d *d);
 void	execute_inst_test(t_list **l, t_d *d);
-int 	execute_inst_test2(char *line, t_d *d);
+int 	execute_inst(char *line, t_d *d);
 void	ft_swap(int bol_a, int bol_b, t_d *d, int *pos);
 void	ft_push(int bol_a, int bol_b, t_d *d, int *pos);
 void	ft_rotate(int bol_a, int bol_b, t_d *d, int *pos);
@@ -94,6 +102,7 @@ void	update_inst(t_list **l);
 
 // ERROR
 int		ft_error(void);
+int		ft_print_err(char *s1, char *s2, char *s3, int ret_wanted);
 
 // FT PUSH SWAP
 int		sort_simple(t_d *d, t_list **l);

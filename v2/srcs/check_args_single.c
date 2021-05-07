@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/16 12:05:55 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 15:50:21 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,12 @@ void	assign_input_single(int count, char *av, t_d *d)
 	d->size_b = 0;
 }
 
-int		check_args_single(char **av, t_d *d)
+int		check_args_single(char **av, t_d *d, int start)
 {
 	int count;
 
 	count = 0;
-	if (check_input_single(av[1], &count) == -1)
+	if (check_input_single(av[start], &count) == -1)
 		return (ft_error());
 	d->a = malloc(sizeof(t_s) * (count));
 	if (d->a == NULL)
@@ -102,12 +102,6 @@ int		check_args_single(char **av, t_d *d)
 		free(d->a);
 		return (ft_error());
 	}
-	assign_input_single(count, av[1], d);
-	if (check_doublons(d) == -1)
-	{
-		free(d->a);
-		free(d->b);
-		return (ft_error());
-	}
+	assign_input_single(count, av[start], d);
 	return (count);
 }

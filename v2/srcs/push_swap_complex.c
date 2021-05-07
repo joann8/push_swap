@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_complex5.c                               :+:      :+:    :+:   */
+/*   push_swap_complex.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/22 19:59:37 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 13:57:30 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
+
 void	print_pack(t_pack *pack)
 {
 	printf("Pack INFO:\n   - size %d | on_a %d | on_b %d\n   - pair: %d\n   - mid_value: %d\n", pack->size, pack->on_a, pack->on_b, pack->pair, pack->mid_value);

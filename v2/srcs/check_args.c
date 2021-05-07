@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/15 19:19:22 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:04:28 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,15 @@ void	ft_free_data(t_d *d)
 	free(d->b);
 }
 
-int		check_doublons(t_d *d)
+void	init_flags(t_res *r)
+{
+	r->f_nb = 0;
+	r->f_err = 0;
+	r->mod_err = 0;
+	r->error_str = NULL;
+}
+
+int		check_doublons(t_d *d, t_res *r)
 {
 	int i;
 	int j;
@@ -45,7 +53,13 @@ int		check_doublons(t_d *d)
 		while (j < d->size_a)
 		{
 			if (d->a[i].nb == d->a[j].nb)
+			{
+				if (r->f_err == 1)
+					ft_print_err("Error: doublon input for value '", ft_itoa(d->a[i].nb), "'\n", -1);
+				else
+					ft_error();
 				return (-1);
+			}
 			j++;
 		}
 		i++;
@@ -53,29 +67,59 @@ int		check_doublons(t_d *d)
 	return (1);
 }
 
-int		check_args(int ac, char **av, t_d *d)
+int		look_for_flags(int ac, char **av, t_res *r)
+{
+	int i;
+
+	i = 1;
+	while (av[i])
+	{
+		if (ft_strncmp(av[i], "-nb", 3) == 0)
+			r->f_nb = 1;
+		else if (ft_strncmp(av[i], "-err", 4) == 0)
+			r->f_err = 1;
+		else
+			break;
+		i++;
+	}
+	if (i == ac)
+		return (-1);
+	return (i);
+}
+
+int		check_args(int ac, char **av, t_d *d, t_res *r)
 {
 	int i;
 	int res;
+	int start;
 
 	res = 1;
+	start = 1;
 	if (ac < 2)
 		return (-1);
-	if (ac > 2)
-		res = check_args_several(ac, av, d);
+	if ((start = look_for_flags(ac, av, r)) == -1)
+		return (-1);
+	if (ac - start > 1)
+		res = check_args_several(ac, av, d, start);
 	else
 	{
 		i = 0;
-		while (av[1][i])
+		while (av[start][i])
 		{
-			if (av[1][i] == ' ')
+			if (av[start][i] == ' ')
 				break ;
 			i++;
 		}
-		if (av[1][i] == '\0')
-			res = check_args_several(ac, av, d);
+		if (av[start][i] == '\0')
+			res = check_args_several(ac, av, d, start);
 		else
-			res = check_args_single(av, d);
+			res = check_args_single(av, d, start);
+	}
+	if (check_doublons(d, r) == -1)
+	{
+		free(d->a);
+		free(d->b);
+		return (-1);
 	}
 	return (res);
 }

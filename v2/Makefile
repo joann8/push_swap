@@ -6,41 +6,60 @@
 #    By: jacher <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/24 17:52:24 by jacher            #+#    #+#              #
-#    Updated: 2021/03/16 12:08:53 by jacher           ###   ########.fr        #
+#    Updated: 2021/05/07 14:21:14 by jacher           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+SRCS_S = srcs/check_args.c \
+		srcs/check_args_single.c \
+		srcs/check_args_several.c \
+		srcs/check_order.c \
+		srcs/error_mngt.c \
+		srcs/instructions.c \
+		srcs/instructions_push.c \
+		srcs/instructions_rotate.c \
+		srcs/instructions_rrotate.c \
+		srcs/instructions_swap.c \
+		srcs/print_help.c
+
+SRCS_C = srcs/checker.c ${SRCS_S}
+SRCS_P = ${SRCS_S} \
+		srcs/push_swap.c \
+		srcs/push_swap_complex.c \
+		srcs/push_swap_simple.c \
+		srcs/checker_test.c
+
+OBJS_C = ${SRCS_C:.c=.o}
+OBJS_P = ${SRCS_P:.c=.o}
 
 CC = clang
 
 CCFLAGS = -Wall -Werror -Wextra
 
-EXE1 = ft_checker/checker
+NAME_C = checker
+NAME_P = push_swap
 
-EXE2 = ft_push_swap/push_swap
+LIBFT = ./libft/libft.a
 
-${EXE1}: sort.h
-	make -C ./ft_checker
-	cp ./ft_checker/checker .
+.c.o: ${LIBFT}
+	${CC} ${CCFLAGS} -I ./libft/ -c $< -o${<:.c=.o}
 
-${EXE2}: sort.h
-	make -C ./ft_push_swap
-	cp ./ft_push_swap/push_swap .
+${NAME_C}: ${LIBFT} ${OBJS_C} sort.h 
+	${CC} ${CCFLAGS} -L ./libft ${OBJS_C} -o ${NAME_C} -lft
 
-all:  ${EXE1} ${EXE2}
+${NAME_P}: ${LIBFT} ${OBJS_P} sort.h 
+	${CC} ${CCFLAGS} -L ./libft ${OBJS_P} -o ${NAME_P} -lft
 
-make: all
+${LIBFT}:
+	make bonus -C ./libft/
+
+all: ${NAME_C} ${NAME_P}
 
 clean:
-	make clean -C ./ft_checker
-	make clean -C ./ft_push_swap
-	make clean -C ./libft
+	rm -f ${OBJS_C} ${OBJS_P}
 
 fclean: clean
-	make fclean -C ./ft_checker
-	make fclean -C ./ft_push_swap
-	make fclean -C ./libft
-	rm checker
-	rm push_swap
+	rm -f ${NAME_C} ${NAME_P}
 
 re: fclean all
 

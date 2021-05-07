@@ -6,89 +6,85 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:51:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 12:30:12 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:39:03 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
 
-int	get_instructions(t_d *d)
+int		get_instructions(t_d *d, int *count)
 {
 	char	*line;
-	char	*inst;
-	char	*tmp;
-	int		count;
+	int		ret;
+	int 	mod;
 
-	count = 0;
-	inst = ft_strdup("");
-	while (get_next_line(0, &line) > 0)
+	mod = 0;
+	while ((ret = get_next_line(0, &line)) > 0)
 	{
-		if (count != 0)
+		if (execute_inst(line, d) == -1)
+			mod = 1;
+		*count += 1;
+		free(line);
+	}
+	if (mod == 1)
+		return (-1);
+	return (ret);
+}
+
+void	print_result(t_d *d, t_res *r, int count)
+{
+	if (check_order(d) == 1)
+		
+	{
+		if (r->f_nb == 1)
 		{
-			tmp = inst;
-			inst = ft_strjoin(tmp, "\n");
-			free(tmp);
-			
+			ft_putstr_fd("OK | #nb of instructions = ", 1);
+			ft_putstr_fd(ft_itoa(count), 1);
+			ft_putstr_fd("\n", 1);
 		}
-		tmp = inst;
-		inst = ft_strjoin(tmp, line);
-		free(tmp);
-		count++;
-		free(line);
-		if (inst == NULL)
-			return (-1);
+		else
+			ft_putstr_fd("OK\n", 1);
 	}
-	free(line);
-	if (check_inst(inst) == -1)
+	else
 	{
-		free(inst);
-		return (ft_error());
-	}
-	printf("count = %d\n", count);
-	execute_inst(inst, d, 0, 0);
-	free(inst);
-	return (1);
-}
-
-int	get_instructions_test(t_d *d)
-{
-	char	*line;
-	int		count;
-
-	count = 0;
-	while (get_next_line(0, &line) > 0)
-	{
-		if (execute_inst_test2(line, d) == -1)
-		 {
-		 	free(line);
-			return (-1);
+		if (r->f_nb == 1)
+		{
+			ft_putstr_fd("KO | #nb of instructions = ", 1);
+			ft_putstr_fd(ft_itoa(count), 1);
+			ft_putstr_fd("\n", 1);
 		}
-		count++;
-		free(line);
+		else
+			ft_putstr_fd("K0\n", 1);
 	}
-	free(line);
-	printf("count = %d\n", count);
-	return (1);
 }
 
 
-
-int	main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_d		d;
-	
-	if (check_args(ac, av, &d) == -1)
+	t_res	r;
+	int		count;
+
+	count = 0;
+	init_flags(&r);
+	if (check_args(ac, av, &d, &r) == -1)
 		return (1);
 //	print_struct(d.size_max, &d);
-	if (get_instructions_test(&d) == -1)
+	if (get_instructions(&d, &count) == -1)
 	{
+		if (r.f_err == 1)
+			ft_putstr_fd("Error : wrong instruction\n", 2);
+		else
+			ft_error();
 		ft_free_data(&d);
 		return (1);
 	}
+	print_result(&d, &r, count);
+	/*
 	if (check_order(&d) == 1)
 		printf("OK\n");
 	else
-		printf("KO\n");
+		printf("KO\n");*/
 	//print_struct(d.size_max, &d);
 	ft_free_data(&d);
 	return (1);

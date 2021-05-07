@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 14:02:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 12:25:58 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:27:44 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,21 @@ void	update_inst_bis(t_list *tmp)
 		|| ((ft_strncmp((const char *)tmp->content, "sb", 3) == 0)
 		&& ft_strncmp((const char *)tmp->next->content, "sa", 3) == 0))
 	{
-	//	printf("swap\n");
-	//		printf("---->1\n");
 		del = tmp->next;
-	//		printf("---->2\n");
 		tmp->next = tmp->next->next;
-	//		printf("---->3\n");
-	//	free(tmp->content);
-	//		printf("---->4\n");
 		tmp->content = ft_strdup("ss");
-	//		printf("---->5\n");
 		free(del);
-	//		printf("---->6\n");
 	}
 	else if ((((ft_strncmp((const char *)tmp->content, "rra", 4) == 0)
 		&& ft_strncmp((const char *)tmp->next->content, "rrb", 4) == 0))
 		|| ((ft_strncmp((const char *)tmp->content, "rrb", 4) == 0)
 		&& ft_strncmp((const char *)tmp->next->content, "rra", 4) == 0))
 	{
-	//	printf("rrotate\n");
-	//		printf("---->1\n");
 		del = tmp->next;
-	//		printf("---->2\n");
 		tmp->next = tmp->next->next;
-	//		printf("---->3\n");
 		free(del);
-	//		printf("---->4\n");
 		free(tmp->content);
-	//		printf("---->5\n");
 		tmp->content = ft_strdup("rrr");
-	//		printf("---->6\n");
 	}
 }
 
@@ -59,7 +44,6 @@ void	update_inst(t_list **l)
 	t_list *tmp;
 	t_list *del;
 
-	//printf("enter update inst\n");
 	tmp = *l;
 	while (tmp && tmp->next)
 	{
@@ -68,18 +52,10 @@ void	update_inst(t_list **l)
 			|| ((ft_strncmp((const char *)tmp->content, "rb", 3) == 0)
 			&& ft_strncmp((const char *)tmp->next->content, "ra", 3) == 0))
 		{
-	//		printf("rotate\n");
-	//		printf("---->1\n");
 			del = tmp->next;
-	//		printf("---->2\n");
 			tmp->next = tmp->next->next;
-	//		printf("---->3\n");
-			//free(tmp->content);
-	//		printf("---->4\n");
 			tmp->content = ft_strdup("rrr");//attnbetion erreur malloc
-	//		printf("---->5\n");
 			free(del);
-	//		printf("---->6\n");
 		}
 		else
 			update_inst_bis(tmp);
@@ -124,7 +100,7 @@ void	execute_inst_test(t_list **l, t_d *d)
 }
 
 
-int	execute_inst_test2(char *line, t_d *d)
+int	execute_inst(char *line, t_d *d)
 {
 	int fake;
 	fake = 0;
@@ -153,12 +129,12 @@ int	execute_inst_test2(char *line, t_d *d)
 		ft_push(0, 1, d, &fake);
 	else
 	{
-		printf("erreur instructions with line = |%s|\n", line);
+		//printf("erreur instructions with line = |%s|\n", line);
 		return (-1);
 	}
 	return (0);
 }
-
+/*
 void	execute_inst(char *str, t_d *d, int a, int b)
 {
 	int i;
@@ -224,4 +200,4 @@ int		check_inst(char *str)
 			i++;
 	}
 	return (1);
-}
+}*/

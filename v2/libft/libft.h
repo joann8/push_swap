@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 18:04:42 by jacher            #+#    #+#             */
-/*   Updated: 2020/11/22 11:43:42 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 14:34:02 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,12 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 								void (*del)(void *));
+unsigned int		ft_strlen_gnl(char *str);
+int					ft_chrn(char *str);
+char				*ft_strjoin_gnl(char *s1, char *s2, int *res);
+void				cpy_join(char *s1, char *s2, unsigned int l, unsigned int st);
+void				cpy_update(char *s1, char *s2, unsigned int st);
+void				ft_strdel(char **str);
+int					get_next_line(int fd, char **line);
 
 #endif

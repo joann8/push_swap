@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/16 12:06:10 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:19:50 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int		check_str_several(char **av, int i)
 	return (1);
 }
 
-int		check_input_several(char **av)
+int		check_input_several(char **av, int start)
 {
 	int					i;
 
-	i = 1;
+	i = start;
 	while (av[i])
 	{
 		if (check_str_several(av, i) == -1)
@@ -55,12 +55,12 @@ int		check_input_several(char **av)
 	return (1);
 }
 
-void	assign_input_several(int ac, char **av, t_d *d)
+void	assign_input_several(int ac, char **av, t_d *d, int start)
 {
 	int i;
 	int j;
 
-	i = 1;
+	i = start;
 	j = 0;
 	while (av[i])
 	{
@@ -71,30 +71,24 @@ void	assign_input_several(int ac, char **av, t_d *d)
 		i++;
 		j++;
 	}
-	d->size_a = ac - 1;
-	d->size_max = ac - 1;
+	d->size_a = ac - start;
+	d->size_max = ac - start;
 	d->size_b = 0;
 }
 
-int		check_args_several(int ac, char **av, t_d *d)
+int		check_args_several(int ac, char **av, t_d *d, int start)
 {
-	if (check_input_several(av) == -1)
+	if (check_input_several(av, start) == -1)
 		return (ft_error());
-	d->a = malloc(sizeof(t_s) * (ac - 1));
+	d->a = malloc(sizeof(t_s) * (ac - start));
 	if (d->a == NULL)
 		return (ft_error());
-	d->b = malloc(sizeof(t_s) * (ac - 1));
+	d->b = malloc(sizeof(t_s) * (ac - start));
 	if (d->b == NULL)
 	{
 		free(d->a);
 		return (ft_error());
 	}
-	assign_input_several(ac, av, d);
-	if (check_doublons(d) == -1)
-	{
-		free(d->a);
-		free(d->b);
-		return (ft_error());
-	}
-	return (ac - 1);
+	assign_input_several(ac, av, d, start);
+	return (ac - start);
 }

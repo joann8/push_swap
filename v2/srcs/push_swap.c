@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 12:27:52 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 16:02:42 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ int			main(int ac, char **av)
 	int		count;
 	int		res;
 	int		res2;
-	t_pack pack;
+	t_pack	pack;
+	t_res	r;
 	
 	l = NULL;
 	l2 = NULL;
-	count = check_args(ac, av, &d);
-	check_args(ac, av, &d2);
+	init_flags(&r);
+	count = check_args(ac, av, &d, &r);
 	if (count == -1)
 		return (1);
+	check_args(ac, av, &d2, &r);
 	if (check_order(&d) == 1)
 	{
 		ft_free_data(&d);
@@ -59,8 +61,9 @@ int			main(int ac, char **av)
 	ft_free_data(&d2);
 //	printf("*****************\n");
 	
-	count = check_args(ac, av, &d);
-	check_args(ac, av, &d2);
+	init_flags(&r);
+	count = check_args(ac, av, &d, &r);
+	check_args(ac, av, &d2, &r);
 	if (count > 4)
 	{
 		if (count == -1)
