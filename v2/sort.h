@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:56:40 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 17:15:33 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 18:26:53 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,22 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
+# define DEF "\e[0m"
+# define BLK "\e[0;30m"
+# define RED "\e[0;31m"
+# define GRN "\e[0;32m"
+# define YEL "\e[0;33m"
+# define BLU "\e[0;34m"
+# define MAG "\e[0;35m"
+# define CYN "\e[0;36m"
+# define WHT "\e[0;37m"
+
 typedef struct	s_result
 {
 	int		f_nb;//show number
 	int		f_err;
 	int		f_see;
-	int		mod_err;//y'a t'il une erreur ou pas
-	char	*error_str;
+	int		f_col;
 }				t_res;
 
 

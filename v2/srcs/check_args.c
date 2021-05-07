@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 16:47:58 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 18:30:12 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	init_flags(t_res *r)
 	r->f_nb = 0;
 	r->f_err = 0;
 	r->f_see = 0;
+	r->f_col = 0;
 }
 
 int		check_doublons(t_d *d, t_res *r)
@@ -79,6 +80,8 @@ int		look_for_flags(int ac, char **av, t_res *r)
 			r->f_err = 1;
 		else if (ft_strncmp(av[i], "-see", 4) == 0)
 			r->f_see = 1;
+		else if (ft_strncmp(av[i], "-col", 4) == 0)
+			r->f_col = 1;
 		else
 			break;
 		i++;

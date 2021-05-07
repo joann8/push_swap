@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:51:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 17:16:49 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/07 18:36:10 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int		get_instructions(t_d *d, int *count, t_res *r)
 	mod = 0;
 	if (r->f_see == 1)
 	{
+		ft_putstr_fd(BLU, 1);
 		ft_putstr_fd("Initial state", 1);
+		ft_putstr_fd(DEF, 1);
 		print_struct2(d->size_max, d);
 	}
 	while ((ret = get_next_line(0, &line)) > 0)
@@ -31,7 +33,10 @@ int		get_instructions(t_d *d, int *count, t_res *r)
 
 		if (r->f_see == 1)
 		{
+			ft_putstr_fd(GRN, 1);
+			ft_putstr_fd("-> ", 1);
 			ft_putstr_fd(line, 1);
+			ft_putstr_fd(DEF, 1);
 			print_struct2(d->size_max, d);
 		}
 		*count += 1;
@@ -47,9 +52,11 @@ void	print_result(t_d *d, t_res *r, int count)
 	if (check_order(d) == 1)
 		
 	{
+		if (r->f_col == 1)
+			ft_putstr_fd(GRN, 1);
 		if (r->f_nb == 1)
 		{
-			ft_putstr_fd("OK #nb of instructions = ", 1);
+		ft_putstr_fd("OK #nb of instructions = ", 1);
 			ft_putstr_fd(ft_itoa(count), 1);
 			ft_putstr_fd("\n", 1);
 		}
@@ -58,6 +65,8 @@ void	print_result(t_d *d, t_res *r, int count)
 	}
 	else
 	{
+		if (r->f_col == 1)
+			ft_putstr_fd(RED, 1);
 		if (r->f_nb == 1)
 		{
 			ft_putstr_fd("KO #nb of instructions = ", 1);

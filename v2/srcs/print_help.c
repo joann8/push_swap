@@ -7,6 +7,7 @@ void print_struct2(int size, t_d *d)
 
 	j = size - 1;
 	ft_putstr_fd("\nSTACK A: ", 1);
+	ft_putstr_fd(DEF, 1);
 	while (j >= 0)
 	{
 		if (d->a[j].bol == 1) 
