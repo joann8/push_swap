@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:08:11 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/12 18:59:47 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/10 17:14:25 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	ft_rrotate_a(t_d *d)
 	int tmp2;
 	int	i;
 
-	//	printf(">>> Reverse Rotate a <<<\n");//A ENLEVER
 	i = 0;
 	while (d->a[i].bol == 0 && i < d->size_max)
 		i++;
@@ -42,7 +41,6 @@ void	ft_rrotate_b(t_d *d)
 	int tmp2;
 	int	i;
 
-	//printf(">>> Reverse Rotate b <<<\n");//A ENLEVER
 	i = 0;
 	while (d->b[i].bol == 0 && i < d->size_max)
 		i++;
@@ -60,13 +58,12 @@ void	ft_rrotate_b(t_d *d)
 	}
 }
 
-void	ft_rrotate(int bol_a, int bol_b, t_d *d, int *pos)
+void	ft_rrotate(int bol_a, int bol_b, t_d *d)
 {
 	if (bol_a == 1)
 		ft_rrotate_a(d);
 	if (bol_b == 1)
 		ft_rrotate_b(d);
-	*pos += 4;
 }
 
 void	ft_rrotate_bis(int bol_a, int bol_b, t_d *d, t_list **l)
@@ -81,5 +78,4 @@ void	ft_rrotate_bis(int bol_a, int bol_b, t_d *d, t_list **l)
 		ft_rrotate_b(d);
 		ft_lstadd_back(l, ft_lstnew((void*)("rrb")));
 	}
-	//	print_struct(d->size_max + 1, d);
 }

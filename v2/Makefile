@@ -6,7 +6,7 @@
 #    By: jacher <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/24 17:52:24 by jacher            #+#    #+#              #
-#    Updated: 2021/05/07 14:21:14 by jacher           ###   ########.fr        #
+#    Updated: 2021/05/10 17:12:18 by jacher           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,18 +16,20 @@ SRCS_S = srcs/check_args.c \
 		srcs/check_order.c \
 		srcs/error_mngt.c \
 		srcs/instructions.c \
+		srcs/instructions_bis.c \
 		srcs/instructions_push.c \
 		srcs/instructions_rotate.c \
 		srcs/instructions_rrotate.c \
 		srcs/instructions_swap.c \
-		srcs/print_help.c
+		srcs/print_help.c \
+		srcs/utils.c
 
 SRCS_C = srcs/checker.c ${SRCS_S}
 SRCS_P = ${SRCS_S} \
 		srcs/push_swap.c \
 		srcs/push_swap_complex.c \
-		srcs/push_swap_simple.c \
-		srcs/checker_test.c
+		srcs/push_swap_complex_bis.c \
+		srcs/push_swap_simple.c 
 
 OBJS_C = ${SRCS_C:.c=.o}
 OBJS_P = ${SRCS_P:.c=.o}

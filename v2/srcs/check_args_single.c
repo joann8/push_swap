@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 15:50:21 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/10 18:02:46 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		check_str_single(char *av, int *j)
 		*j += 1;
 	}
 	if ((av[*j] != '\0' && av[*j] != ' ')
-		|| res > (long unsigned int)INT_MAX + bol_neg)
+		|| res > (long unsigned int)I_MAX + bol_neg)
 		return (-1);
 	return (1);
 }
@@ -92,7 +92,7 @@ int		check_args_single(char **av, t_d *d, int start)
 
 	count = 0;
 	if (check_input_single(av[start], &count) == -1)
-		return (ft_error());
+		return (-2);
 	d->a = malloc(sizeof(t_s) * (count));
 	if (d->a == NULL)
 		return (ft_error());

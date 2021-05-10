@@ -1,29 +1,26 @@
-#include "../sort.h"
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_help.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/10 17:25:51 by jacher            #+#    #+#             */
+/*   Updated: 2021/05/10 17:32:00 by jacher           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void print_struct2(int size, t_d *d)
+#include "../sort.h"
+
+void	print_struct_b(int size, t_d *d)
 {
 	int j;
 
 	j = size - 1;
-	ft_putstr_fd("\nSTACK A: ", 1);
-	ft_putstr_fd(DEF, 1);
-	while (j >= 0)
-	{
-		if (d->a[j].bol == 1) 
-		{
-			ft_putstr_fd(ft_itoa(d->a[j].nb), 1);
-			ft_putstr_fd(" ", 1);
-		}
-		if (j == 0)
-			ft_putstr_fd("\n", 1);
-		j--;
-	}
-	j = size - 1;
 	ft_putstr_fd("STACK B: ", 1);
 	while (j >= 0)
 	{
-		if (d->b[j].bol == 1) 
+		if (d->b[j].bol == 1)
 		{
 			ft_putstr_fd(ft_itoa(d->b[j].nb), 1);
 			ft_putstr_fd(" ", 1);
@@ -32,35 +29,34 @@ void print_struct2(int size, t_d *d)
 			ft_putstr_fd("\n", 1);
 		j--;
 	}
-	ft_putstr_fd("\n", 1);
 }
 
-
-void print_struct(int size, t_d *d)
+void	print_struct(int size, t_d *d)
 {
 	int j;
 
-	j = 0;
-	printf("___________________\n");
-	while (j < size)
+	j = size - 1;
+	ft_putstr_fd("\nSTACK A: ", 1);
+	ft_putstr_fd(DEF, 1);
+	while (j >= 0)
 	{
-		if (d->a[j].bol == 1 && d->b[j].bol == 1)
-			printf("  |%d|   -   |%d|\n", d->a[j].nb, d->b[j].nb);
-		else if (d->a[j].bol == 1)
-			printf("  |%d|   -   |-|\n", d->a[j].nb);
-		else if (d->b[j].bol == 1)
-			printf("  |-|   -   |%d|\n", d->b[j].nb);
-		else
-			printf("  |-|   -   |-|\n");
-		j++;
+		if (d->a[j].bol == 1)
+		{
+			ft_putstr_fd(ft_itoa(d->a[j].nb), 1);
+			ft_putstr_fd(" ", 1);
+		}
+		if (j == 0)
+			ft_putstr_fd("\n", 1);
+		j--;
 	}
-	printf("\n\n");
+	print_struct_b(size, d);
+	ft_putstr_fd("\n", 1);
 }
 
-int	print_list(t_list *l, int mod)
+int		print_list(t_list *l, int mod)
 {
-	t_list *tmp;
-	int count;
+	t_list	*tmp;
+	int		count;
 
 	tmp = l;
 	count = 0;
@@ -70,44 +66,9 @@ int	print_list(t_list *l, int mod)
 		{
 			ft_putstr_fd(tmp->content, 1);
 			ft_putstr_fd("\n", 1);
-		}	
+		}
 		count++;
 		tmp = tmp->next;
 	}
-	if (mod == 1 || mod == 0)
-		printf("total instructions = %d\n", count);
-	return(count);
+	return (count);
 }
-/*
-void print_struct(int ac, t_s *a, t_s *b)
-{
-	int i;
-	int j;
-
-	printf("________________\n");
-	printf("*** Stack A ****\n");
-	i = 1;
-	j = 0;
-	while (i < ac)
-	{
-		if (a[j].bol == 1)
-			printf("   %d: nb = |%d| bol = %d\n", i, a[j].nb, a[j].bol);
-		else
-			printf("   %d: nb = |-| bol = %d\n", i, a[j].bol);
-		i++;
-		j++;
-	}
-	printf("\n*** Stack B ****\n");
-	i = 1;
-	j = 0;
-	while (i < ac)
-	{
-		if (b[j].bol == 1)
-			printf("   %d: nb = |%d| bol = %d\n", i, b[j].nb, b[j].bol);
-		else
-			printf("   %d: nb = |-| bol = %d\n", i, b[j].bol);
-		i++;
-		j++;
-	}
-	printf("\n\n");
-}*/

@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:08:11 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/16 15:34:46 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/10 17:15:09 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_push_b(t_d *d)
 
 	j = 0;
 	i = 0;
-//	printf(">>> Push b <<<\n");//A ENELVER
 	while (j < d->size_max && d->b[j].bol == 0)
 		j++;
 	j--;
@@ -41,7 +40,6 @@ void	ft_push_a(t_d *d)
 
 	j = 0;
 	i = 0;
-	//printf(">>> Push a <<<\n");//A ENELEVER
 	while (j < d->size_max && d->a[j].bol == 0)
 		j++;
 	j--;
@@ -56,14 +54,12 @@ void	ft_push_a(t_d *d)
 	d->size_b -= 1;
 }
 
-void	ft_push(int bol_a, int bol_b, t_d *d, int *pos)
+void	ft_push(int bol_a, int bol_b, t_d *d)
 {
 	if (bol_b == 1)
 		ft_push_b(d);
 	else if (bol_a == 1)
 		ft_push_a(d);
-	//print_struct(d->size_max + 1, d);
-	*pos += 3;
 }
 
 void	ft_push_bis(int bol_a, int bol_b, t_d *d, t_list **l)
@@ -78,5 +74,4 @@ void	ft_push_bis(int bol_a, int bol_b, t_d *d, t_list **l)
 		ft_push_a(d);
 		ft_lstadd_back(l, ft_lstnew((void*)("pa")));
 	}
-	//	print_struct(d->size_max + 1, d);
 }

@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 16:19:50 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/10 18:02:29 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		check_str_several(char **av, int i)
 		res = res * 10 + av[i][j] - 48;
 		j++;
 	}
-	if (av[i][j] != '\0' || res > (long unsigned int)INT_MAX + bol_neg)
+	if (av[i][j] != '\0' || res > (long unsigned int)I_MAX + bol_neg)
 		return (-1);
 	return (1);
 }
@@ -79,7 +79,7 @@ void	assign_input_several(int ac, char **av, t_d *d, int start)
 int		check_args_several(int ac, char **av, t_d *d, int start)
 {
 	if (check_input_several(av, start) == -1)
-		return (ft_error());
+		return (-2);
 	d->a = malloc(sizeof(t_s) * (ac - start));
 	if (d->a == NULL)
 		return (ft_error());

@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_test.c                                     :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 15:51:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/23 14:22:57 by jacher           ###   ########.fr       */
+/*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
+/*   Updated: 2021/05/10 15:35:15 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
 
-int	checker_test(t_list **l, t_d *d)
+void	ft_free_list(t_list *l)
 {
-	execute_inst_test(l, d);
-	if (check_order(d) == 1)
-		printf("OK\n");
-	else
-		printf("KO\n");
-	return (1);
+	t_list *tmp;
+	t_list *del;
+
+	tmp = l;
+	while (tmp)
+	{
+		del = tmp;
+		tmp = tmp->next;
+		free(del);
+	}
+}
+
+void	ft_free_data(t_d *d)
+{
+	free(d->a);
+	free(d->b);
+}
+
+void	init_flags(t_res *r)
+{
+	r->f_nb = 0;
+	r->f_err = 0;
+	r->f_see = 0;
+	r->f_col = 0;
 }

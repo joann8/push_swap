@@ -6,39 +6,49 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:51:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 18:36:10 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/10 18:13:22 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
 
-int		get_instructions(t_d *d, int *count, t_res *r)
+void	get_instructions_see(t_d *d, char *line, int mod)
 {
-	char	*line;
-	int		ret;
-	int 	mod;
-
-	mod = 0;
-	if (r->f_see == 1)
+	if (mod == 0)
 	{
 		ft_putstr_fd(BLU, 1);
 		ft_putstr_fd("Initial state", 1);
 		ft_putstr_fd(DEF, 1);
-		print_struct2(d->size_max, d);
+		print_struct(d->size_max, d);
 	}
+	if (mod == 1)
+	{
+		if (is_inst(line) == 1)
+		{
+			ft_putstr_fd(BLU, 1);
+			ft_putstr_fd("-> ", 1);
+			ft_putstr_fd(line, 1);
+			ft_putstr_fd(DEF, 1);
+			print_struct(d->size_max, d);
+		}
+	}
+}
+
+int		get_instructions(t_d *d, int *count, t_res *r)
+{
+	char	*line;
+	int		ret;
+	int		mod;
+
+	mod = 0;
+	if (r->f_see == 1)
+		get_instructions_see(d, NULL, 0);
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (execute_inst(line, d) == -1)
 			mod = 1;
-
 		if (r->f_see == 1)
-		{
-			ft_putstr_fd(GRN, 1);
-			ft_putstr_fd("-> ", 1);
-			ft_putstr_fd(line, 1);
-			ft_putstr_fd(DEF, 1);
-			print_struct2(d->size_max, d);
-		}
+			get_instructions_see(d, line, 1);
 		*count += 1;
 		free(line);
 	}
@@ -50,15 +60,13 @@ int		get_instructions(t_d *d, int *count, t_res *r)
 void	print_result(t_d *d, t_res *r, int count)
 {
 	if (check_order(d) == 1)
-		
 	{
 		if (r->f_col == 1)
 			ft_putstr_fd(GRN, 1);
 		if (r->f_nb == 1)
 		{
-		ft_putstr_fd("OK #nb of instructions = ", 1);
 			ft_putstr_fd(ft_itoa(count), 1);
-			ft_putstr_fd("\n", 1);
+			ft_putstr_fd(" instructions --> OK\n", 1);
 		}
 		else
 			ft_putstr_fd("OK\n", 1);
@@ -69,15 +77,13 @@ void	print_result(t_d *d, t_res *r, int count)
 			ft_putstr_fd(RED, 1);
 		if (r->f_nb == 1)
 		{
-			ft_putstr_fd("KO #nb of instructions = ", 1);
 			ft_putstr_fd(ft_itoa(count), 1);
-			ft_putstr_fd("\n", 1);
+			ft_putstr_fd(" instructions --> KO\n", 1);
 		}
 		else
 			ft_putstr_fd("K0\n", 1);
 	}
 }
-
 
 int		main(int ac, char **av)
 {
@@ -87,9 +93,8 @@ int		main(int ac, char **av)
 
 	count = 0;
 	init_flags(&r);
-	if (check_args(ac, av, &d, &r) == -1)
+	if (check_args(ac, av, &d, &r) < 0)
 		return (1);
-//	print_struct(d.size_max, &d);
 	if (get_instructions(&d, &count, &r) == -1)
 	{
 		if (r.f_err == 1)
@@ -100,12 +105,6 @@ int		main(int ac, char **av)
 		return (1);
 	}
 	print_result(&d, &r, count);
-	/*
-	if (check_order(&d) == 1)
-		printf("OK\n");
-	else
-		printf("KO\n");*/
-	//print_struct(d.size_max, &d);
 	ft_free_data(&d);
 	return (1);
 }

@@ -6,103 +6,94 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/07 16:02:42 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/10 18:03:36 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
 
-void		check(t_list **l, t_d *d)
+int		try_free_help(t_d *d, t_list **l)
 {
-//	printf("\nENTER CHECK\n");
-//	print_struct(d->size_max, d);
-	checker_test(l, d);
-//	printf("AFTER\n");
-//	print_list(*l, 2);
-//	print_struct(d->size_max, d);
-//	printf("_______________\n");
-}	
-	
-int			main(int ac, char **av)
+	if (d)
+		ft_free_data(d);
+	if (l && *l)
+		ft_free_list(*l);
+	return (-1);
+}
+
+int		try_simple_sort(int ac, char **av, t_list **l, int *res)
 {
+	t_res	r;
 	t_d		d;
-	t_d 	d2;
-	t_list	*l;
-	t_list	*l2;
-	int		count;
-	int		res;
-	int		res2;
+	int		count; 
+
+	init_flags(&r);
+	if ((count = check_args(ac, av, &d, &r)) < 0)
+		return (-1);
+	if (check_order(&d) == 1)
+		return (try_free_help(&d, l));
+	if (count < 101)
+	{
+		if (d.size_max > 2)
+			sort_simple(&d, l);
+		else
+			ft_swap_bis(1, 0, &d, l);
+		if (update_inst(l) == -1)
+			return (try_free_help(&d, l));
+		*res = print_list(*l, 3);
+	}
+	else
+		*res = I_MAX;
+	ft_free_data(&d);
+	return (0);
+}
+
+int		try_complex_sort(int ac, char **av, t_list **l, int *res)
+{
 	t_pack	pack;
 	t_res	r;
-	
-	l = NULL;
-	l2 = NULL;
+	t_d		d;
+	int		count;
+
 	init_flags(&r);
-	count = check_args(ac, av, &d, &r);
-	if (count == -1)
-		return (1);
-	check_args(ac, av, &d2, &r);
-	if (check_order(&d) == 1)
-	{
-		ft_free_data(&d);
-		ft_free_list(l);
-		return (1);
-	}
-//	printf("sort simple res:\n");
-	if (d.size_max > 2)
-		sort_simple(&d, &l);
-	else
-		ft_swap_bis(1, 0, &d, &l);
-	update_inst(&l);
-//	printf("***SIMPLE RES****\n");
-//	check(&l, &d2);
-	res = print_list(l, 3);
-	ft_free_data(&d);
-	ft_free_data(&d2);
-//	printf("*****************\n");
-	
-	init_flags(&r);
-	count = check_args(ac, av, &d, &r);
-	check_args(ac, av, &d2, &r);
+	if ((count = check_args(ac, av, &d, &r)) < 0)
+		return (-1);
 	if (count > 4)
 	{
-		if (count == -1)
-			return (1);
 		if (check_order(&d) == 1)
-		{
-			ft_free_data(&d);
-			ft_free_list(l2);
-			return (1);
-		}
+			return (try_free_help(&d, l));
 		define_pack(d.a, 0, d.size_max, &pack);
-		algo_push_swap(&d, &l2, 0, &pack);
-		//printf("sort complex res:\n");
-		update_inst(&l2);
-//		printf("***ALGO PUSH SWAP****\n");
-	//	check(&l2, &d2);
-		res2 = print_list(l2, 3);
-//		printf("*****************\n");
+		algo_push_swap(&d, l, 0, &pack);
+		if (update_inst(l) == -1)
+			return (try_free_help(&d, l));
+		*res = print_list(*l, 3);
 	}
 	else
-		res2 = INT_MAX;
-	if (res < res2)
-	{
-		print_list(l, 2);
-	//	printf("chose option 1 : %d | (option 2 was %d)\n", res, res2);
-//		print_struct(d.size_max, &d);
-	}
-	else
-	{
-		print_list(l2, 2);
-	//	printf("chose option 2 : %d | (option 1 was %d)\n", res2, res);
-//		print_struct(d.size_max, &d);
-	}
+		*res = I_MAX;
+	ft_free_data(&d);
+	return (0);
+}
 
-	if (res2 < INT_MAX)
-	{
-		ft_free_data(&d);
+int		main(int ac, char **av)
+{
+	t_list	*l;
+	t_list	*l2;
+	int		res;
+	int		res2;
+
+	l = NULL;
+	l2 = NULL;
+	if (try_simple_sort(ac, av, &l, &res) == -1)
+		return (1);
+	if (try_complex_sort(ac, av, &l2, &res2) == -1)
+		return (1);
+	if (res < res2)
+		print_list(l, 2);
+	else
+		print_list(l2, 2);
+	if (res2 < I_MAX)
 		ft_free_list(l2);
-	}
-	ft_free_list(l);
+	if (res < I_MAX)
+		ft_free_list(l);
 	return (1);
 }

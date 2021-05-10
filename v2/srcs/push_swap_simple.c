@@ -6,52 +6,14 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/03/23 10:36:57 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/10 18:05:31 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
 
-void		swap_rotate_first_b(t_d *d, t_list **l)
+void		swap_rotate_first_a(t_d *d, t_list **l, int i, int action)
 {
-	int i;
-	int action;
-
-	i = d->size_max - d->size_b;
-	action = 0;
-	while (action == 0)
-	{
-		if (d->b[i].nb < d->b[i + 1].nb)
-		{
-			if (d->size_b > 2 && d->b[i + 1].nb < d->b[d->size_max - 1].nb
-				&& d->b[d->size_max - 1].nb < d->b[i].nb)
-				ft_rotate_bis(0, 1, d, l);
-			if (check_int_order_b(d) == 1)
-				break;
-			ft_swap_bis(0, 1, d, l);
-			action = 1;
-		}
-		else if (d->b[i].nb < d->b[d->size_max - 1].nb)
-		{
-			ft_rrotate_bis(0, 1, d, l);
-			action = 1;
-		}
-		if (action == 1)
-		{
-			i = d->size_max - d->size_b;
-			action = 0;
-		}
-		else
-			action = 1;
-	}
-}
-void		swap_rotate_first_a(t_d *d, t_list **l)
-{
-	int i;
-	int action;
-
-	i = d->size_max - d->size_a;
-	action = 0;
 	while (action == 0)
 	{
 		if (d->a[i].nb > d->a[i + 1].nb)
@@ -60,7 +22,7 @@ void		swap_rotate_first_a(t_d *d, t_list **l)
 				&& d->a[d->size_max - 1].nb < d->a[i].nb)
 				ft_rotate_bis(1, 0, d, l);
 			if (check_int_order_a(d) == 1)
-				break;
+				break ;
 			ft_swap_bis(1, 0, d, l);
 			action = 1;
 		}
@@ -86,7 +48,7 @@ int			find_min_a(t_d *d)
 	int i_a;
 	int count;
 
-	min_a = INT_MAX;
+	min_a = I_MAX;
 	i = d->size_max - d->size_a;
 	i_a = -1;
 	count = -1;
@@ -139,7 +101,7 @@ int			sort_simple(t_d *d, t_list **l)
 	int i_a;
 
 	if (d->size_a >= 2)
-		swap_rotate_first_a(d, l);
+		swap_rotate_first_a(d, l, d->size_max - d->size_a, 0);
 	i_a = find_min_a(d);
 	if (check_int_order_a(d) == -1 && i_a > 0)
 		put_min_on_top(d, l, i_a);
