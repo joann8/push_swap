@@ -6,40 +6,34 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/10 14:02:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/11 19:21:52 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/11 19:33:19 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
 
-void	update_inst_bis(t_list **src)
+void		update_inst_bis(t_list *tmp)
 {
-	t_list	*tmp;
-	t_list	*del;
-
-	tmp = *src;
+	t_list *del;
 	if ((((ft_strncmp((const char *)tmp->content, "sa", 3) == 0)
 		&& ft_strncmp((const char *)tmp->next->content, "sb", 3) == 0))
 		|| ((ft_strncmp((const char *)tmp->content, "sb", 3) == 0)
 		&& ft_strncmp((const char *)tmp->next->content, "sa", 3) == 0))
 	{
-		free(tmp->content);
-		free(tmp->next->content);
 		del = tmp->next;
 		tmp->next = tmp->next->next;
-		free(del);
 		tmp->content = ft_strdup("ss");
+		free(del);
 	}
 	else if ((((ft_strncmp((const char *)tmp->content, "rra", 4) == 0)
 		&& ft_strncmp((const char *)tmp->next->content, "rrb", 4) == 0))
 		|| ((ft_strncmp((const char *)tmp->content, "rrb", 4) == 0)
 		&& ft_strncmp((const char *)tmp->next->content, "rra", 4) == 0))
 	{
-		free(tmp->content);
-		free(tmp->next->content);
 		del = tmp->next;
 		tmp->next = tmp->next->next;
 		free(del);
+		free(tmp->content);
 		tmp->content = ft_strdup("rrr");
 	}
 }
@@ -48,7 +42,7 @@ int		update_inst(t_list **l)
 {
 	t_list *tmp;
 	t_list *del;
-
+	
 	tmp = *l;
 	while (tmp && tmp->next)
 	{
@@ -57,41 +51,14 @@ int		update_inst(t_list **l)
 			|| ((ft_strncmp((const char *)tmp->content, "rb", 3) == 0)
 			&& ft_strncmp((const char *)tmp->next->content, "ra", 3) == 0))
 		{
-			free(tmp->content);
-		free(tmp->next->content);
-		del = tmp->next;
-		tmp->next = tmp->next->next;
-		free(del);
-		
+			del = tmp->next;
+			tmp->next = tmp->next->next;
+			tmp->content = ft_strdup("rr");//attnbetion erreur malloc
 			tmp->content = ft_strdup("rr");
+			free(del);
 		}
-		else if ((((ft_strncmp((const char *)tmp->content, "sa", 3) == 0)
-		&& ft_strncmp((const char *)tmp->next->content, "sb", 3) == 0))
-		|| ((ft_strncmp((const char *)tmp->content, "sb", 3) == 0)
-		&& ft_strncmp((const char *)tmp->next->content, "sa", 3) == 0))
-	{
-		free(tmp->content);
-		free(tmp->next->content);
-		del = tmp->next;
-		tmp->next = tmp->next->next;
-		free(del);
-		tmp->content = ft_strdup("ss");
-	}
-	else if ((((ft_strncmp((const char *)tmp->content, "rra", 4) == 0)
-		&& ft_strncmp((const char *)tmp->next->content, "rrb", 4) == 0))
-		|| ((ft_strncmp((const char *)tmp->content, "rrb", 4) == 0)
-		&& ft_strncmp((const char *)tmp->next->content, "rra", 4) == 0))
-	{
-		free(tmp->content);
-		free(tmp->next->content);
-		del = tmp->next;
-		tmp->next = tmp->next->next;
-		free(del);
-		tmp->content = ft_strdup("rrr");
-	}
-
-	//	else
-	//		update_inst_bis(&tmp);
+		else
+			update_inst_bis(tmp);
 		if (tmp->content == NULL)
 			return (-1);
 		tmp = tmp->next;
