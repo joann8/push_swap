@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/10 17:04:22 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/11 18:48:30 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ void	algo_push_swap_b(t_d *d, t_list **l, t_pack *old_pack)
 	res = define_pack(d->b, d->size_max - d->size_b,
 	d->size_max - d->size_b + old_pack->on_b, &new_pack);
 	if (res == 1)
-	{
 		put_on_a(d, l, &new_pack, 0);
-	}
 	else
 	{
 		new_pack.on_a = old_pack->on_a;
@@ -109,11 +107,33 @@ void	algo_push_swap_b(t_d *d, t_list **l, t_pack *old_pack)
 	algo_push_swap_b_help(d, l, &new_pack);
 }
 
+#include <stdio.h>
+
 int		algo_push_swap(t_d *d, t_list **l, int mod, t_pack *old_pack)
 {
+	int count;
+
 	if (mod == 1 || mod == 0)
-		algo_push_swap_a(d, l, mod, old_pack);
+	{
+		if (check_int_order_a(d) == -1)
+			algo_push_swap_a(d, l, mod, old_pack);
+	//	else
+	//		printf("NO A\n");
+	}
 	if (mod == 2)
-		algo_push_swap_b(d, l, old_pack);
+	{
+		if (check_int_order_b_range(d->b, d->size_max - d->size_b, d->size_max - d->size_b + old_pack->on_b) == -1)
+			algo_push_swap_b(d, l, old_pack);
+		else
+		{
+			count = 0;
+			while(count < old_pack->on_b)
+			{
+				ft_push_bis(1, 0, d, l);
+				count++;
+			}
+		//	printf("NO B\n");
+		}
+	}
 	return (1);
 }

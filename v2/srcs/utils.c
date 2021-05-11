@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 15:53:22 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/10 15:35:15 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/11 19:13:13 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_free_list(t_list *l)
 	{
 		del = tmp;
 		tmp = tmp->next;
+	//	free(del->content);
 		free(del);
 	}
 }

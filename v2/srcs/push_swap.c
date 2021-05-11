@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/10 18:03:36 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/11 19:11:16 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		try_simple_sort(int ac, char **av, t_list **l, int *res)
 	if ((count = check_args(ac, av, &d, &r)) < 0)
 		return (-1);
 	if (check_order(&d) == 1)
-		return (try_free_help(&d, l));
+		return (try_free_help(&d, NULL));
 	if (count < 101)
 	{
 		if (d.size_max > 2)
@@ -61,7 +61,7 @@ int		try_complex_sort(int ac, char **av, t_list **l, int *res)
 	if (count > 4)
 	{
 		if (check_order(&d) == 1)
-			return (try_free_help(&d, l));
+			return (try_free_help(&d, NULL));
 		define_pack(d.a, 0, d.size_max, &pack);
 		algo_push_swap(&d, l, 0, &pack);
 		if (update_inst(l) == -1)

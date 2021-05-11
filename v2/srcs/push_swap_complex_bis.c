@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/10 16:51:28 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/11 18:26:58 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 	count = 0;
 	while (moved < p->on_a)
 	{
-		if ((p->pair == 0 && d->b[d->size_max - d->size_b].nb < p->mid_value)
-			|| (p->pair == 1
-				&& d->b[d->size_max - d->size_b].nb <= p->mid_value))
+		if (d->b[d->size_max - d->size_b].nb <= p->mid_value)
 		{
 			ft_rotate_bis(0, 1, d, l);
 			count++;
@@ -32,7 +30,7 @@ int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 			moved++;
 		}
 	}
-	while (count > 0)
+	while (p->on_a < d->size_b / 2 && count > 0)
 	{
 		ft_rrotate_bis(0, 1, d, l);
 		count--;
@@ -43,13 +41,11 @@ int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 int		put_on_b(t_d *d, t_list **l, t_pack *p, int moved)
 {
 	int count;
-
+	
 	count = 0;
 	while (moved < p->on_b)
 	{
-		if ((p->pair == 0 && d->a[d->size_max - d->size_a].nb >= p->mid_value)
-			|| (p->pair == 1
-				&& d->a[d->size_max - d->size_a].nb > p->mid_value))
+		if (d->a[d->size_max - d->size_a].nb > p->mid_value)
 		{
 			ft_rotate_bis(1, 0, d, l);
 			count++;
@@ -60,7 +56,7 @@ int		put_on_b(t_d *d, t_list **l, t_pack *p, int moved)
 			moved++;
 		}
 	}
-	while (count > 0)
+	while (p->on_b < d->size_a / 2 && count > 0)
 	{
 		ft_rrotate_bis(1, 0, d, l);
 		count--;
@@ -81,8 +77,8 @@ int		define_pack_help(int mid_value, int pack_half, int size, t_pack *pack)
 	else
 	{
 		pack->pair = 1;
-		pack->on_a = pack_half;
-		pack->on_b = pack_half + 1;
+		pack->on_a = pack_half + 1;
+		pack->on_b = pack_half;
 	}
 	return (1);
 }
@@ -105,7 +101,7 @@ int		define_pack(t_s *s, int low, int high, t_pack *pack)
 		j = low;
 		while (j < high)
 		{
-			if (j != i && s[j].nb < test)
+			if (s[j].nb <= test)
 				count++;
 			j++;
 		}

@@ -6,7 +6,7 @@
 #    By: jacher <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/24 17:52:24 by jacher            #+#    #+#              #
-#    Updated: 2021/05/10 17:12:18 by jacher           ###   ########.fr        #
+#    Updated: 2021/05/11 18:49:11 by jacher           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,16 +46,20 @@ LIBFT = ./libft/libft.a
 .c.o: ${LIBFT}
 	${CC} ${CCFLAGS} -I ./libft/ -c $< -o${<:.c=.o}
 
+${NAME_P}: ${LIBFT} ${OBJS_P} sort.h 
+	${CC} ${CCFLAGS} -L ./libft ${OBJS_P} -o ${NAME_P} -lft
+	
 ${NAME_C}: ${LIBFT} ${OBJS_C} sort.h 
 	${CC} ${CCFLAGS} -L ./libft ${OBJS_C} -o ${NAME_C} -lft
 
-${NAME_P}: ${LIBFT} ${OBJS_P} sort.h 
-	${CC} ${CCFLAGS} -L ./libft ${OBJS_P} -o ${NAME_P} -lft
+
 
 ${LIBFT}:
 	make bonus -C ./libft/
 
-all: ${NAME_C} ${NAME_P}
+bonus: ${NAME_C} ${NAME_P}
+	
+all: ${NAME_P}
 
 clean:
 	rm -f ${OBJS_C} ${OBJS_P}
