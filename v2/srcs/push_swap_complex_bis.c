@@ -6,11 +6,12 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/11 18:26:58 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/13 17:23:11 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
+#include <stdio.h>
 
 int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 {
@@ -21,8 +22,13 @@ int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 	{
 		if (d->b[d->size_max - d->size_b].nb <= p->mid_value)
 		{
-			ft_rotate_bis(0, 1, d, l);
-			count++;
+			if (count == p->on_b - 1 && moved == p->on_a - 1)
+				ft_swap_bis(0, 1, d, l);
+			else
+			{
+				ft_rotate_bis(0, 1, d, l);
+				count++;
+			}
 		}
 		else
 		{
@@ -41,14 +47,19 @@ int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 int		put_on_b(t_d *d, t_list **l, t_pack *p, int moved)
 {
 	int count;
-	
+
 	count = 0;
 	while (moved < p->on_b)
 	{
 		if (d->a[d->size_max - d->size_a].nb > p->mid_value)
 		{
-			ft_rotate_bis(1, 0, d, l);
-			count++;
+			if (count == p->on_a - 1 && moved == p->on_b - 1)
+				ft_swap_bis(1, 0, d, l);
+			else
+			{
+				ft_rotate_bis(1, 0, d, l);
+				count++;
+			}
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/11 19:11:16 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/13 18:35:12 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		try_simple_sort(int ac, char **av, t_list **l, int *res)
 {
 	t_res	r;
 	t_d		d;
-	int		count; 
+	int		count;
 
 	init_flags(&r);
 	if ((count = check_args(ac, av, &d, &r)) < 0)

@@ -6,7 +6,7 @@
 #    By: jacher <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/24 17:52:24 by jacher            #+#    #+#              #
-#    Updated: 2021/05/11 18:49:11 by jacher           ###   ########.fr        #
+#    Updated: 2021/05/13 17:41:30 by jacher           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,15 @@ SRCS_P = ${SRCS_S} \
 		srcs/push_swap.c \
 		srcs/push_swap_complex.c \
 		srcs/push_swap_complex_bis.c \
+		srcs/push_swap_complex_test.c \
+		srcs/push_swap_complex_3.c \
+		srcs/push_swap_complex_4.c \
+		srcs/push_swap_complex_5.c \
+		srcs/push_swap_complex_6.c \
+		srcs/push_swap_complex_7.c \
+		srcs/push_swap_complex_8.c \
+		srcs/push_swap_complex_special.c \
+		srcs/push_swap_complex_special_bis.c \
 		srcs/push_swap_simple.c 
 
 OBJS_C = ${SRCS_C:.c=.o}

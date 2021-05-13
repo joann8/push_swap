@@ -6,15 +6,15 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/13 18:59:35 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/12 16:26:48 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
-#include <stdio.h>
+
 void	algo_push_swap_a_help(t_d *d, t_list **l, t_pack *new_pack)
 {
-	if (new_pack->on_a > 8)
+	if (new_pack->on_a > 3)
 	{
 		algo_push_swap(d, l, 1, new_pack);
 		algo_push_swap(d, l, 2, new_pack);
@@ -22,45 +22,13 @@ void	algo_push_swap_a_help(t_d *d, t_list **l, t_pack *new_pack)
 	else
 	{
 		if (new_pack->on_a == 2)
-		{
 			if (d->a[d->size_max - d->size_a].nb
 					> d->a[d->size_max - d->size_a + 1].nb)
 				ft_swap_bis(1, 0, d, l);
-		}
-		else if (new_pack->on_a == 3)
-		{
-			if (special_3_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 4)
-		{
-			if (special_4_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}	
-		else if (new_pack->on_a == 5)
-		{
-			if (special_5_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 6)
-		{
-			if (special_6_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 7)
-		{
-			if (special_7_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 8)
-		{
-			if (special_8_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-	
-		else
-			algo_push_swap(d, l, 1, new_pack);
-	
+		if (new_pack->on_a == 3)
+			sort_array_3_a(d, l);
+		if (new_pack->on_a == 4)
+			sort_array_4_a(d, l);
 		
 		if (new_pack->on_b == 2)
 		{
@@ -71,35 +39,9 @@ void	algo_push_swap_a_help(t_d *d, t_list **l, t_pack *new_pack)
 			ft_push_bis(1, 0, d, l);
 		}
 		else if (new_pack->on_b == 3)
-		{
-			if (special_3_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
+			sort_array_3_b(d, l);
 		else if (new_pack->on_b == 4)
-		{
-			if (special_4_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-		else if (new_pack->on_b == 5)
-		{
-			if (special_5_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-		else if (new_pack->on_b == 6)
-		{
-			if (special_6_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-		else if (new_pack->on_b == 7)
-		{
-			if (special_7_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-		else if (new_pack->on_b == 8)
-		{
-			if (special_8_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
+			sort_array_4_b(d, l);
 		else
 			algo_push_swap(d, l, 2, new_pack);
 	}
@@ -130,53 +72,21 @@ void	algo_push_swap_a(t_d *d, t_list **l, int mod, t_pack *old_pack)
 
 void	algo_push_swap_b_help(t_d *d, t_list **l, t_pack *new_pack)
 {
-	if (new_pack->on_a > 8)
-	{	
+	if (new_pack->on_a > 3)
+	{
 		algo_push_swap(d, l, 1, new_pack);
 		algo_push_swap(d, l, 2, new_pack);
 	}
 	else
 	{	
 		if (new_pack->on_a == 2)
-		{
 			if (d->a[d->size_max - d->size_a].nb
 					> d->a[d->size_max - d->size_a + 1].nb)
 				ft_swap_bis(1, 0, d, l);
-		}
-		else if (new_pack->on_a == 3)
-		{
-			if (special_3_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 4)
-		{
-			if (special_4_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 5)
-		{
-			if (special_5_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 6)
-		{
-			if (special_6_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 7)
-		{
-			if (special_7_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else if (new_pack->on_a == 8)
-		{
-			if (special_8_a(d, l) == 0)
-				algo_push_swap(d, l, 1, new_pack);
-		}
-		else
-			algo_push_swap(d, l, 1, new_pack);
-
-
+		if (new_pack->on_a == 3)
+			sort_array_3_a(d, l);
+		if (new_pack->on_a == 4)
+			sort_array_4_a(d, l);
 
 		if (new_pack->on_b == 2)
 		{
@@ -187,36 +97,9 @@ void	algo_push_swap_b_help(t_d *d, t_list **l, t_pack *new_pack)
 			ft_push_bis(1, 0, d, l);
 		}
 		else if (new_pack->on_b == 3)
-		{
-			if (special_3_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
+			sort_array_3_b(d, l);
 		else if (new_pack->on_b == 4)
-		{
-			if (special_4_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-		else if (new_pack->on_b == 5)
-		{
-			if (special_5_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-		else if (new_pack->on_b == 6)
-		{
-			if (special_6_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-		else if (new_pack->on_b == 7)
-		{
-			if (special_7_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}	
-		else if (new_pack->on_b == 8)
-		{
-			if (special_8_b(d, l) == 0)
-				algo_push_swap(d, l, 2, new_pack);
-		}
-	
+			sort_array_4_b(d, l);
 		else
 			algo_push_swap(d, l, 2, new_pack);
 	}
@@ -228,11 +111,9 @@ void	algo_push_swap_b(t_d *d, t_list **l, t_pack *old_pack)
 	int		res;
 
 	res = define_pack(d->b, d->size_max - d->size_b,
-			d->size_max - d->size_b + old_pack->on_b, &new_pack);
+	d->size_max - d->size_b + old_pack->on_b, &new_pack);
 	if (res == 1)
-	{
 		put_on_a(d, l, &new_pack, 0);
-	}
 	else
 	{
 		new_pack.on_a = old_pack->on_a;
@@ -257,9 +138,7 @@ int		algo_push_swap(t_d *d, t_list **l, int mod, t_pack *old_pack)
 	{
 		if (check_int_order_b_range(d->b, d->size_max - d->size_b,
 				d->size_max - d->size_b + old_pack->on_b) == -1)
-		{
 			algo_push_swap_b(d, l, old_pack);
-		}
 		else
 		{
 			count = 0;

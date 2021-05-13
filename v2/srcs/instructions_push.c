@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:08:11 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/11 19:24:01 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/12 11:33:56 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,21 @@ void	ft_push(int bol_a, int bol_b, t_d *d)
 
 void	ft_push_bis(int bol_a, int bol_b, t_d *d, t_list **l)
 {
-	// A AJOUTER SUR TOUTES LES FONCTIONS t_list	*new;
+	t_list	*new;
+	char	*tmp;
 
 	if (bol_b == 1)
 	{
 		ft_push_b(d);
-		ft_lstadd_back(l, ft_lstnew((void*)("pb")));
+		tmp = ft_strdup("pb");
+		new = ft_lstnew(tmp);
+		ft_lstadd_back(l, new);
 	}
 	else if (bol_a == 1)
 	{
 		ft_push_a(d);
-		ft_lstadd_back(l, ft_lstnew((void*)("pa")));
+		tmp = ft_strdup("pa");
+		new = ft_lstnew(tmp);
+		ft_lstadd_back(l, new);
 	}
 }
