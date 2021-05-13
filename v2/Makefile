@@ -6,7 +6,7 @@
 #    By: jacher <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/24 17:52:24 by jacher            #+#    #+#              #
-#    Updated: 2021/05/13 17:41:30 by jacher           ###   ########.fr        #
+#    Updated: 2021/05/13 23:38:00 by jacher           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS_S = srcs/check_args.c \
 		srcs/check_order.c \
 		srcs/error_mngt.c \
 		srcs/instructions.c \
+		srcs/instructions_update.c \
 		srcs/instructions_bis.c \
 		srcs/instructions_push.c \
 		srcs/instructions_rotate.c \
@@ -29,15 +30,12 @@ SRCS_P = ${SRCS_S} \
 		srcs/push_swap.c \
 		srcs/push_swap_complex.c \
 		srcs/push_swap_complex_bis.c \
-		srcs/push_swap_complex_test.c \
-		srcs/push_swap_complex_3.c \
-		srcs/push_swap_complex_4.c \
-		srcs/push_swap_complex_5.c \
-		srcs/push_swap_complex_6.c \
-		srcs/push_swap_complex_7.c \
-		srcs/push_swap_complex_8.c \
 		srcs/push_swap_complex_special.c \
 		srcs/push_swap_complex_special_bis.c \
+		srcs/push_swap_complex_3_a.c \
+		srcs/push_swap_complex_3_b.c \
+		srcs/push_swap_complex_4_a.c \
+		srcs/push_swap_complex_4_b.c \
 		srcs/push_swap_simple.c 
 
 OBJS_C = ${SRCS_C:.c=.o}

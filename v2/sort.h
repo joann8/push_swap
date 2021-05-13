@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:56:40 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/13 17:41:18 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/14 00:20:51 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,33 +98,12 @@ void			ft_free_data(t_d *d);
 void			init_flags(t_res *r);
 void			print_struct(int ac, t_d *d);
 int				print_list(t_list *l, int mod);
-
-int			sort_simple_array_a(t_d *d, t_list **l, t_pack *p, int size); 
-int			sort_simple_array_b(t_d *d, t_list **l, t_pack *p, int size); 
-int			sort_array_3_b(t_d *d, t_list **l); 
-int			sort_array_4_b(t_d *d, t_list **l); 
-int			sort_array_3_a(t_d *d, t_list **l); 
-int			sort_array_4_a(t_d *d, t_list **l); 
-void		sort_insertion_array_a(t_d *d, t_list **l, t_pack *p); 
-void		sort_insertion_array_b(t_d *d, t_list **l, t_pack *p); 
-int		special_3_b(t_d *d, t_list **l);
-int		special_3_a(t_d *d, t_list **l);
-int		special_4_b(t_d *d, t_list **l);
-int		special_4_a(t_d *d, t_list **l);
-int		special_5_b(t_d *d, t_list **l);
-int		special_5_a(t_d *d, t_list **l);
-int		special_6_b(t_d *d, t_list **l);
-int		special_6_a(t_d *d, t_list **l);
-int		special_7_b(t_d *d, t_list **l);
-int		special_7_a(t_d *d, t_list **l);
-
-int		special_8_b(t_d *d, t_list **l);
-int		special_8_a(t_d *d, t_list **l);
-
-int		ft_push_on_a(t_d *d, t_list **l, int nb);
-
-
-
-
+int				special_3_b(t_d *d, t_list **l);
+int				special_3_a(t_d *d, t_list **l);
+int				special_4_b(t_d *d, t_list **l, int nb);
+int				special_4_a(t_d *d, t_list **l);
+void			look_for_special_a(t_d *d, t_list **l, t_pack *new_pack);
+void			look_for_special_b(t_d *d, t_list **l, t_pack *new_pack);
+int				ft_push_on_a(t_d *d, t_list **l, int nb);
 
 #endif

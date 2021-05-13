@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:08:11 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/13 12:00:20 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/13 22:58:29 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_rotate_bis(int bol_a, int bol_b, t_d *d, t_list **l)
 	if (bol_a == 1)
 	{
 		if (d->size_a < 2)
-			return;
+			return ;
 		ft_rotate_a(d);
 		tmp = ft_strdup("ra");
 		new = ft_lstnew(tmp);
@@ -75,7 +75,7 @@ void	ft_rotate_bis(int bol_a, int bol_b, t_d *d, t_list **l)
 	if (bol_b == 1)
 	{
 		if (d->size_b < 2)
-			return;
+			return ;
 		ft_rotate_b(d);
 		tmp = ft_strdup("rb");
 		new = ft_lstnew(tmp);

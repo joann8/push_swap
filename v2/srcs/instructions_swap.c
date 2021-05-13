@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 13:08:11 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/13 12:08:09 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/13 22:57:04 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ft_swap_bis(int bol_a, int bol_b, t_d *d, t_list **l)
 	if (bol_a == 1)
 	{
 		if (d->size_a < 2)
-			return;
+			return ;
 		ft_swap_a(d);
 		tmp = ft_strdup("sa");
 		new = ft_lstnew(tmp);

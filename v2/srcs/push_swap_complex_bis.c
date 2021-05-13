@@ -6,12 +6,23 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/13 17:23:11 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/14 00:14:44 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../sort.h"
-#include <stdio.h>
+
+void	put_on_help(t_d *d, t_list **l, int count, char c)
+{
+	while (count > 0)
+	{
+		if (c == 'a')
+			ft_rrotate_bis(1, 0, d, l);
+		else if (c == 'b')
+			ft_rrotate_bis(0, 1, d, l);
+		count--;
+	}
+}
 
 int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 {
@@ -36,11 +47,8 @@ int		put_on_a(t_d *d, t_list **l, t_pack *p, int moved)
 			moved++;
 		}
 	}
-	while (p->on_a < d->size_b / 2 && count > 0)
-	{
-		ft_rrotate_bis(0, 1, d, l);
-		count--;
-	}
+	if (p->on_a < d->size_b / 2)
+		put_on_help(d, l, count, 'b');
 	return (1);
 }
 
@@ -67,11 +75,8 @@ int		put_on_b(t_d *d, t_list **l, t_pack *p, int moved)
 			moved++;
 		}
 	}
-	while (p->on_b < d->size_a / 2 && count > 0)
-	{
-		ft_rrotate_bis(1, 0, d, l);
-		count--;
-	}
+	if (p->on_b < d->size_a / 2)
+		put_on_help(d, l, count, 'a');
 	return (1);
 }
 
