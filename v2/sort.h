@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/09 09:56:40 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/14 00:20:51 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/15 12:15:19 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,5 @@ int				special_4_a(t_d *d, t_list **l);
 void			look_for_special_a(t_d *d, t_list **l, t_pack *new_pack);
 void			look_for_special_b(t_d *d, t_list **l, t_pack *new_pack);
 int				ft_push_on_a(t_d *d, t_list **l, int nb);
-
+int				update_doublons(t_list **l);
 #endif

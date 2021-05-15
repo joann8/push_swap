@@ -6,7 +6,7 @@
 /*   By: jacher <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 15:35:55 by jacher            #+#    #+#             */
-/*   Updated: 2021/05/13 20:11:39 by jacher           ###   ########.fr       */
+/*   Updated: 2021/05/15 12:14:30 by jacher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		try_simple_sort(int ac, char **av, t_list **l, int *res)
 			ft_swap_bis(1, 0, &d, l);
 		if (update_inst(l) == -1)
 			return (try_free_help(&d, l));
+		update_doublons(l);
 		*res = print_list(*l, 3);
 	}
 	else
@@ -66,6 +67,7 @@ int		try_complex_sort(int ac, char **av, t_list **l, int *res)
 		algo_push_swap(&d, l, 0, &pack);
 		if (update_inst(l) == -1)
 			return (try_free_help(&d, l));
+		update_doublons(l);
 		*res = print_list(*l, 3);
 	}
 	else

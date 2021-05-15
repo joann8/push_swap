@@ -6,7 +6,7 @@
 #    By: jacher <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/24 17:52:24 by jacher            #+#    #+#              #
-#    Updated: 2021/05/13 23:38:00 by jacher           ###   ########.fr        #
+#    Updated: 2021/05/15 12:28:52 by jacher           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS_S = srcs/check_args.c \
 		srcs/error_mngt.c \
 		srcs/instructions.c \
 		srcs/instructions_update.c \
+		srcs/instructions_doublons.c \
 		srcs/instructions_bis.c \
 		srcs/instructions_push.c \
 		srcs/instructions_rotate.c \
